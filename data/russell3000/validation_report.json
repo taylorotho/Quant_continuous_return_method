@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "parquet_file_count": 676,
+  "row_count": 10948280,
+  "constituent_snapshot_count": 2581,
+  "priced_ticker_count": 2573,
+  "unpriced_ticker_count": 8,
+  "minimum_date": "2001-11-05",
+  "maximum_date": "2026-11-05",
+  "duplicate_ticker_day_count": 0,
+  "invalid_adjusted_close_count": 0
+}

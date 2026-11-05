@@ -1,0 +1,28 @@
+{
+  "created_at_utc": "2026-11-05T17:46:23.123739+00:00",
+  "universe_definition": "Current equity holdings of iShares Russell 3000 ETF (IWV)",
+  "universe_source": "https://www.ishares.com/us/products/239714/ishares-russell-3000-etf/latest-holdings.csv",
+  "universe_as_of": "Nov 04, 2026",
+  "constituent_count": 2581,
+  "requested_start_date": "2001-11-05",
+  "requested_end_date_inclusive": "2026-11-05",
+  "price_source": "Yahoo Finance via yfinance",
+  "canonical_price_column": "adjusted_close_usd",
+  "canonical_price_definition": "Daily close adjusted for splits and cash dividends",
+  "row_granularity": "One row per current constituent per available trading day",
+  "output_format": "Hive-partitioned Parquet by calendar year, Zstandard compression",
+  "completed_batch_count": 26,
+  "row_count": 10948280,
+  "failed_ticker_count": 8,
+  "failed_tickers": [
+    "ADRO",
+    "AKE",
+    "GTXI",
+    "HOLX",
+    "INH",
+    "P5N994",
+    "THRD",
+    "UWMC-R-W"
+  ],
+  "survivorship_bias_warning": "The universe is intentionally filtered to constituents present at the snapshot date; it is not the historical Russell 3000 membership and therefore has survivorship bias."
+}
