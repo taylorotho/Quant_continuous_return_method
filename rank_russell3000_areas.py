@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rank Russell 3000 firms by six-month normalized price-path area."""
+"""Rank Russell 3000 firms by six-month log-price-path area."""
 
 from __future__ import annotations
 
@@ -266,7 +266,7 @@ def select_low_area_high_return(area_ranking: pd.DataFrame) -> pd.DataFrame:
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Rank current Russell 3000 firms by normalized six-month price-path area."
+        description="Rank current Russell 3000 firms by log-price six-month path area."
     )
     parser.add_argument("--month", type=int, required=True, help="Exclusive endpoint month (1-12)")
     parser.add_argument("--year", type=int, required=True, help="Exclusive endpoint year")

@@ -1,4 +1,4 @@
-"""Measure how far a six-month stock-price path bends from monthly chords."""
+"""Measure how far a six-month log-price path bends from monthly chords."""
 
 from __future__ import annotations
 
@@ -27,14 +27,16 @@ def _absolute_linear_area(left_gap: float, right_gap: float) -> float:
 
 
 def calculate_six_month_area(prices: pd.DataFrame) -> float:
-    """Return the normalized area between a stock path and its monthly chords.
+    """Return the area between a log-price path and its monthly chords.
 
     ``prices`` must contain one stock's daily observations for exactly six
     consecutive represented calendar months. Partial first and last months are
     allowed, but every month needs at least two observations. Every price is
-    divided by the first price in the six-month period before measuring area.
+    transformed with the natural logarithm before measuring area. Equivalently,
+    the geometry uses ``log(price / first_period_price)``; subtracting that
+    constant does not affect the measured area.
 
-    Within each month, a chord joins the first and last normalized prices. The
+    Within each month, a chord joins the first and last log prices. The
     observed prices and the chord are both treated as linear between adjacent
     trading observations, with every adjacent pair one horizontal unit apart.
     The returned scalar is the sum of the absolute areas between those lines.
@@ -87,11 +89,11 @@ def calculate_six_month_area(prices: pd.DataFrame) -> float:
         raise ValueError("every represented month must contain at least two observations")
 
     first_price = float(frame.loc[0, PRICE_COLUMN])
-    frame["_normalized_price"] = frame[PRICE_COLUMN] / first_price
+    frame["_log_price"] = (frame[PRICE_COLUMN] / first_price).map(math.log)
 
     total_area = 0.0
     for _, monthly in frame.groupby("_month", sort=False, observed=True):
-        monthly_prices = monthly["_normalized_price"].tolist()
+        monthly_prices = monthly["_log_price"].tolist()
         interval_count = len(monthly_prices) - 1
         chord_start = monthly_prices[0]
         chord_change = monthly_prices[-1] - chord_start

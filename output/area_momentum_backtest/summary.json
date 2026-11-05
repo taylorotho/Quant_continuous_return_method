@@ -1,0 +1,10 @@
+{
+  "average_yahoo_beta": 0.7537407053045376,
+  "yahoo_beta_observation_count": 11194,
+  "yahoo_beta_holding_count": 20247,
+  "russell_3000_beta": 1.0305350327651224,
+  "strategy_total_return": 8.399332826279217,
+  "russell_3000_price_index_return": 5.872992279095801,
+  "survivorship_bias_warning": "Uses the November 2026 universe throughout history.",
+  "beta_warning": "Yahoo constituent betas are current, not historical."
+}

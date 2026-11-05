@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import unittest
 
 import pandas as pd
@@ -36,7 +37,7 @@ class CalculateSixMonthAreaTests(unittest.TestCase):
         frame = six_month_frame()
         frame["adjusted_close_usd"] = [
             10.0,
-            15.0,
+            math.sqrt(200.0),
             20.0,
             20.0,
             25.0,
@@ -53,7 +54,7 @@ class CalculateSixMonthAreaTests(unittest.TestCase):
         self.assertAlmostEqual(calculate_six_month_area(frame), 0.0)
 
     def test_known_curved_path_area(self) -> None:
-        self.assertAlmostEqual(calculate_six_month_area(six_month_frame()), 1.0)
+        self.assertAlmostEqual(calculate_six_month_area(six_month_frame()), math.log(2.0))
 
     def test_crossing_is_split_into_absolute_triangles(self) -> None:
         frame = six_month_frame()
@@ -68,7 +69,10 @@ class CalculateSixMonthAreaTests(unittest.TestCase):
         january = frame["date"].astype(str).str.startswith("2026-01")
         frame.loc[january, "adjusted_close_usd"] = [20.0, 30.0, 20.0, 10.0]
 
-        self.assertAlmostEqual(calculate_six_month_area(frame), 0.75)
+        a = math.log(1.5)
+        b = abs(math.log(0.5))
+        expected = a / 2 + (a**2 + b**2) / (2 * (a + b)) + b / 2
+        self.assertAlmostEqual(calculate_six_month_area(frame), expected)
 
     def test_price_scale_does_not_change_area(self) -> None:
         frame = six_month_frame()

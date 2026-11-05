@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import tempfile
 import unittest
 from pathlib import Path
@@ -80,7 +81,7 @@ class RankRussell3000AreasTests(unittest.TestCase):
             self.assertEqual(ranking["ticker"].tolist(), ["BBB", "AAA"])
             self.assertEqual(ranking["rank"].tolist(), [1, 2])
             self.assertAlmostEqual(ranking.loc[0, "area"], 0.0)
-            self.assertAlmostEqual(ranking.loc[1, "area"], 6.0)
+            self.assertAlmostEqual(ranking.loc[1, "area"], 6.0 * math.log(2.0))
             self.assertEqual(ranking["company_name"].tolist(), ["Beta", "Alpha"])
             self.assertAlmostEqual(ranking.loc[0, "six_month_return"], 0.0)
             self.assertAlmostEqual(ranking.loc[1, "six_month_return"], 0.0)

@@ -1,0 +1,11 @@
+{
+  "area_y_axis": "natural log of adjusted price",
+  "average_yahoo_beta": 0.7852792014877801,
+  "yahoo_beta_observation_count": 11082,
+  "yahoo_beta_holding_count": 20247,
+  "russell_3000_beta": 1.0305350327651224,
+  "strategy_total_return": 10.061896016583702,
+  "russell_3000_price_index_return": 5.872992279095801,
+  "survivorship_bias_warning": "Uses the November 2026 universe throughout history.",
+  "beta_warning": "Yahoo constituent betas are current, not historical."
+}
